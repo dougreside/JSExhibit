@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
+<style type="text/css">
+.hiddenElement{
+height:1px;
+width:1px;
+
+
+}
+#currentObjectView{
+	overflow:auto;
+	position: absolute;
+}
+.objWrapper{
+ 	padding: 0px;
+ 	margin: 0px;
+ 	position: relative;
+ 	
+}
+.sidebar_right {
+	background: rgba(255,255,255,.65);
+	position: absolute;
+	right: 0;
+	min-height: 100%;
+	width: 210px;
+	padding: 0px;
+}
+.content{
+width: 60%;
+margin-right: 250px;
+}
+</style>
+<link href="./css/bootstrap.css" rel="stylesheet"/>
+<script type="text/JavaScript" src="./js/jquery-1.7.min.js"></script>
+<script type="text/JavaScript" src="./js/jquery-ui.min.js"></script>
+<script type="text/JavaScript" src="./js/underscore-min.js"></script>
+<script type="text/JavaScript" src="./js/jquery.ba-hashchange.min.js"></script>
+<script type="text/JavaScript">
+cObj = null; // current Object
+
+function loadCurrentObject(data){
+	cObj = data;	
+	$("#currentObjectView").html("<div class='objWrapper'>"+cObj.embedHTML+"</div>");	
+	$("#currentObjectView>div.objWrapper>img").css({"height": "400"});
+	$("#currentObjectView>div.objWrapper").css({"height":400,"width":$("#currentObjectView>div.objWrapper>img").width()});
+	
+	$(".objectTitle").html(cObj.title);
+	
+	loadFragments(cObj.fragments);
+	hash = getHash();
+	loadRelated(cObj.relatedObjects);
+	if (hash.indexOf("_")>0){
+	frag = hash.substring(hash.indexOf("_")+1);
+
+	if (frag.length>0){
+	
+		applyFrag(frag);
+	}
+	}
+	return;
+}
+$(document).ready(function(){
+
+	loadHash(window.location.hash);
+}
+
+);
+function loadRelated(rels){
+	for (rel in rels){
+		$("#")
+	}
+	return;
+}
+function applyFrag(curFrag){
+	
+	switch (cObj.type){
+	case "image":
+	
+		curH = $("#currentObjectView>div.objWrapper>img").height();
+	
+		$(".fragSquare").remove();
+		
+		
+		fragData = _.find(cObj.fragments,function(thisfrag){ return thisfrag.id == curFrag; });
+		
+		scale = parseFloat(curH)/parseFloat(cObj.fileMetadata.height);
+		
+		$("#currentObjectView>div.objWrapper").append("<div class='fragSquare' id='curFrag'></div>");
+		newLeft = scale*parseFloat(fragData.constraint.left)+$("#currentObjectView>div.objWrapper>img").position().left;
+		newTop = scale*parseFloat(fragData.constraint.top)+$("#currentObjectView>div.objWrapper>img").position().top;
+		newWidth = scale*parseFloat(fragData.constraint.width);
+		newHeight = scale*parseFloat(fragData.constraint.height);
+		
+		$(".fragSquare").css({"opacity": 0.5, "position": "absolute","left": newLeft,"top":newTop,"width":newWidth,"height": newHeight,"background-color":"cyan"});
+	break;
+	case "youtube":
+		
+	break;
+	default: 
+	
+	}
+}
+function loadFragments(frags){
+	$(".fragList").empty();
+	
+	for (frag in frags){
+		$(".fragList").append("<div class='fragTitle' id='"+frags[frag].id+"'><a href='#"+cObj.id+"_"+frags[frag].id+"'>"+frags[frag].title+"</a></div>");
+	}
+	return;
+
+}
+function getHash(){
+	hash = window.location.hash;
+	if (hash.substring(0,1)=="#"){
+		objectId = hash.substring(1);
+		}
+		else{
+		objectId= hash;
+		}
+	return objectId
+}
+function loadHash(hash){
+
+	
+	hash = getHash();
+
+	if (hash.indexOf("_")>0){
+		hash = hash.substring(0,hash.indexOf("_"));
+	}
+	$.ajax({
+				url: hash+".js",
+				dataType: 'jsonP',
+				jsonpCallback: "loadObject",
+				success: function(data){
+					
+						loadCurrentObject(data);
+						
+						
+				  }
+	});
+	
+}
+
+$(window).hashchange( function(){
+    // Alerts every time the hash changes!
+    
+	
+	loadHash(window.location.hash);
+	  
+    }
+  );
+</script>
+<title>JS Exhibit</title>
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+      }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid">
+ 
+    <div class="topbar">
+      <div class="topbar-inner">
+        <div class="container-fluid">
+          <a class="brand" href="#">Collate</a>
+
+          <ul class="nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        
+        </div>
+      </div>
+    </div>
+	
+
+    <div class="sidebar">
+        <div class="well">
+          <h5 class='objectTitle'>About</h5>
+          
+          <div id="objectDesc">
+     		
+          	</div>
+     
+          
+          </div>
+    
+          <div class="well">
+          <h5>Annotations</h5>
+          <div class="fragList">
+          
+          </div>
+        </div>
+      </div>
+       <div class="sidebar_right">
+        <div class="well">
+          <h5>Related Items</h5>
+          <ul id="relatedItemList">
+          </ul>
+    </div>
+    
+          <div class="well">
+          <h5>Preview</h5>
+          <div class="previewBox">
+          
+          </div>
+        </div>
+      </div>
+      <div class="content">
+        <!-- Main hero unit for a primary marketing message or call to action -->
+        <div id="currentObjectView" class="hero-unit">
+     
+        	
+        </div>
+   
+         </div>
+
+</div>
+</div>
+
+</body>
+</html>

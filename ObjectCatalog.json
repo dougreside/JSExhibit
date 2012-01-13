@@ -1,0 +1,32 @@
+Objects=
+[
+{
+"uri":"http://images.nypl.org/index.php?id=psnypl_the_4302&t=w",
+"fragments":[
+{"id":"fragment0000",
+ "title":"Title of Show",
+ "constraint":{"top":"40","left":"24","width":"350","height":"80"},
+ "data":{
+ 
+ }
+}],
+"title":"Poster for Wizard of Oz",
+"type":"image"
+},
+{
+"uri":"http://www.youtube.com/watch?&v=nauLgZISozs",
+"fragments":[
+{"id":"fragment0001",
+ "title":"Scarecrow raises finger",
+ "constraint":{"s":"39s"},
+ "data":{
+ 
+ }
+}],
+"title":"If I Only Had a Brain",
+"type":"YouTube"
+}
+
+
+
+]
