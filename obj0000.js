@@ -21,7 +21,7 @@ loadCurrentObject({
                   {
                 	"id":"obj0001",
                 	"url":"http://www.youtube.com/watch?&v=nauLgZISozs",
-                	"embedHTML":"",
+                	"embedHTML":"<object style='width: 300px'><param name='movie' value='https://www.youtube.com/v/nauLgZISozs?version=3&feature=player_detailpage'><param name='allowFullScreen' value='true'><param name='allowScriptAccess' value='always'><embed src='https://www.youtube.com/v/nauLgZISozs?version=3&feature=player_detailpage' type='application/x-shockwave-flash' allowfullscreen='true' allowScriptAccess='always' width='400'></object>",
                 	"fileMetaData":{},
                 	"fragment":["39s"],
                 	"relationship":"Derived from the same work",
@@ -30,7 +30,7 @@ loadCurrentObject({
                   },
                   {
                 	"id":"obj0002",
-                	"embedHTML":"",
+                	"embedHTML":"<img width=400 src='http://images.nypl.org/index.php?id=TH-37687&t=w'/>",
                 	"fileMetaData":{},
                   	"url":"http://images.nypl.org/index.php?id=TH-37687&t=w",
                   	"fragment":"null",
@@ -38,7 +38,7 @@ loadCurrentObject({
                   },
                   {
                 	"id":"obj0003",
-                	"embedHTML":"",
+                	"embedHTML":"<img width=400 src='http://images.nypl.org/index.php?id=TH-37669&t=w'/>",
                 	"fileMetaData":{},
                   	"url":"http://images.nypl.org/index.php?id=TH-37690&t=w",
                   	"fragment":"null",
